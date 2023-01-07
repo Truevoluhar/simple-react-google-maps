@@ -50,7 +50,7 @@ class SimpleGoogleMaps extends Component {
               position: i,
               map: map,
             });
-            attachSecretMessage(marker)
+            this.attachSecretMessage(marker)
           }
         }else{
           new google.maps.Marker({
