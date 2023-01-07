@@ -23,6 +23,17 @@ class SimpleGoogleMaps extends Component {
     });
   }
 
+  attachSecretMessage(marker) {
+    const infowindow = new google.maps.InfoWindow({
+      content: this.props.sporocilo,
+    });
+  
+    marker.addListener("click", () => {
+      infowindow.open(marker.get("map"), marker);
+    });
+  }
+
+
   render(){
     if(this.state.mapLoaded){
       var map = new window.google.maps.Map(document.getElementById('map'), {
@@ -39,6 +50,7 @@ class SimpleGoogleMaps extends Component {
               position: i,
               map: map,
             });
+            attachSecretMessage(marker)
           }
         }else{
           new google.maps.Marker({
@@ -64,5 +76,7 @@ SimpleGoogleMaps.propTypes = {
   markers: PropTypes.oneOfType([
     PropTypes.objectOf(PropTypes.number),
     PropTypes.arrayOf(PropTypes.object)
-  ])
+  ]),
+  onClick: PropTypes.func,
+  sporocilo: PropTypes.string
 }
